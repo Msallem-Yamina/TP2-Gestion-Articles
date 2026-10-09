@@ -1,0 +1,32 @@
+@model TP_Product.Models.Product
+
+@{
+    ViewData["Title"] = "Delete";
+    var photoPath = "~/images/" + (Model.Image ?? "noimage.jpg");
+}
+
+<div class="card shadow border-0 mx-auto" style="max-width: 800px;">
+    <div class="card-header bg-danger text-white">
+        <h4 class="mb-0">Supprimer cet article ?</h4>
+    </div>
+    <div class="row g-0">
+        <div class="col-md-5 d-flex align-items-center bg-white">
+            <img src="@photoPath" asp-append-version="true" class="img-fluid p-3" alt="@Model.Name" />
+        </div>
+        <div class="col-md-7">
+            <div class="card-body p-4">
+                <span class="badge bg-secondary mb-2">@Model.Category.CategoryName</span>
+                <h3>@Model.Name</h3>
+                <p class="price-tag text-primary">@Model.Price DT</p>
+                <p><b>Quantité en stock :</b> @Model.QteStock</p>
+                <p class="text-danger">Cette action est définitive.</p>
+
+                <form asp-action="Delete">
+                    <input type="hidden" asp-for="ProductId" />
+                    <button type="submit" class="btn btn-danger">Oui, supprimer</button>
+                    <a asp-action="Index" class="btn btn-outline-secondary">Annuler</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

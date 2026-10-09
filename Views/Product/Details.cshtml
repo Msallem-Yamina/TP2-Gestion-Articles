@@ -1,0 +1,26 @@
+@model TP_Product.Models.Product
+
+@{
+    ViewData["Title"] = "Details";
+    var photoPath = "~/images/" + (Model.Image ?? "noimage.jpg");
+}
+
+<div class="card shadow border-0 mx-auto" style="max-width: 800px;">
+    <div class="row g-0">
+        <div class="col-md-5 d-flex align-items-center bg-white">
+            <img src="@photoPath" asp-append-version="true" class="img-fluid p-3" alt="@Model.Name" />
+        </div>
+        <div class="col-md-7">
+            <div class="card-body p-4">
+                <span class="badge bg-secondary mb-2">@Model.Category.CategoryName</span>
+                <h2 class="card-title">@Model.Name</h2>
+                <p class="price-tag text-primary fs-2">@Model.Price DT</p>
+                <p class="mb-4">
+                    <b>Quantité en stock :</b> @Model.QteStock unités
+                </p>
+                <a asp-action="Edit" asp-route-id="@Model.ProductId" class="btn btn-primary">Modifier</a>
+                <a asp-action="Index" class="btn btn-outline-secondary">Retour à la liste</a>
+            </div>
+        </div>
+    </div>
+</div>

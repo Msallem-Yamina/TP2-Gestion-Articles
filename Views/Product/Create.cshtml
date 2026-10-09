@@ -1,0 +1,71 @@
+@model TP_Product.ViewModels.CreateViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-7 col-lg-6">
+        <div class="card shadow border-0">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">Nouvel article</h4>
+            </div>
+            <div class="card-body p-4">
+                <form enctype="multipart/form-data" asp-action="Create">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+
+                    <div class="mb-3">
+                        <label asp-for="Name" class="form-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Price" class="form-label"></label>
+                            <input asp-for="Price" class="form-control" />
+                            <span asp-validation-for="Price" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="QteStock" class="form-label"></label>
+                            <input asp-for="QteStock" class="form-control" />
+                            <span asp-validation-for="QteStock" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="CategoryId" class="form-label"></label>
+                        <select asp-for="CategoryId" class="form-select" asp-items="ViewBag.CategoryId"></select>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="ImagePath" class="form-label"></label>
+                        <input asp-for="ImagePath" class="form-control" type="file" id="imageInput" accept="image/*" />
+                        <span asp-validation-for="ImagePath" class="text-danger"></span>
+                    </div>
+                    <div class="text-center mb-3">
+                        <img id="preview" src="" alt="" style="max-height:160px; display:none;" class="rounded border p-1" />
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <a asp-action="Index" class="btn btn-outline-secondary">Retour</a>
+                        <input type="submit" value="Créer l'article" class="btn btn-success" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.getElementById('imageInput').addEventListener('change', function () {
+            var preview = document.getElementById('preview');
+            if (this.files && this.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'inline-block';
+                };
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+    </script>
+}
