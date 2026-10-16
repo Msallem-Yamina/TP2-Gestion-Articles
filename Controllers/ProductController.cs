@@ -33,6 +33,7 @@ namespace TP_Product.Controllers
         }
 
         // GET: ProductController/Details/5
+        [AllowAnonymous]
         public ActionResult Details(int id)
         {
             var product = ProductRepository.GetById(id);
