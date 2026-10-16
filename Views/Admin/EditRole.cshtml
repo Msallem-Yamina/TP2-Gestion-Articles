@@ -1,0 +1,57 @@
+@model TP_Product.ViewModels.EditRoleViewModel
+@{
+    ViewData["Title"] = "Modifier le rôle";
+}
+
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+        <div class="card auth-card mx-auto mb-4">
+            <div class="auth-header">
+                <div class="auth-avatar">✏️</div>
+                <h2 class="h3 mb-1">Modifier le rôle</h2>
+                <p class="mb-0 opacity-75">@Model.Id</p>
+            </div>
+            <div class="card-body p-4">
+                <form method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                    <input type="hidden" asp-for="Id" />
+
+                    <div class="form-floating mb-3">
+                        <input asp-for="RoleName" class="form-control" placeholder="Nom du rôle" />
+                        <label asp-for="RoleName"></label>
+                        <span asp-validation-for="RoleName" class="text-danger small"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-auth w-100">Mettre à jour</button>
+                    <a asp-action="ListRoles" class="btn btn-outline-secondary w-100 mt-2">Annuler</a>
+                </form>
+            </div>
+        </div>
+
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white"><h5 class="mb-0">Utilisateurs de ce rôle</h5></div>
+            <div class="card-body">
+                @if (Model.Users.Any())
+                {
+                    foreach (var user in Model.Users)
+                    {
+                        <span class="badge bg-secondary me-1 mb-1">@user</span>
+                    }
+                }
+                else
+                {
+                    <p class="text-muted mb-0">Aucun pour le moment</p>
+                }
+            </div>
+            <div class="card-footer bg-white">
+                <a asp-controller="Admin" asp-action="EditUsersInRole" asp-route-roleId="@Model.Id" class="btn btn-primary">
+                    Ajouter ou retirer des utilisateurs
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

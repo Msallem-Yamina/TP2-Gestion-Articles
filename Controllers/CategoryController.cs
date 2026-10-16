@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TP_Product.Models;
 using TP_Product.Models.Repositories;
 
 namespace TP_Product.Controllers
 {
+    [Authorize]
     public class CategoryController : Controller
     {
         readonly ICategorieRepository CategRepository;
@@ -14,6 +16,7 @@ namespace TP_Product.Controllers
         }
 
         // GET: CategoryController
+        [AllowAnonymous]
         public ActionResult Index()
         {
             var Categories = CategRepository.GetAll();

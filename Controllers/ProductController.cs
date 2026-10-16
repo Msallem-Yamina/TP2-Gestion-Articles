@@ -3,9 +3,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using TP_Product.Models;
 using TP_Product.Models.Repositories;
 using TP_Product.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TP_Product.Controllers
 {
+
+    // [Authorize(Roles = "Admin,Manager")]
     public class ProductController : Controller
     {
         readonly IProductRepository ProductRepository;
@@ -22,6 +25,7 @@ namespace TP_Product.Controllers
         }
 
         // GET: ProductController
+        [AllowAnonymous]
         public ActionResult Index()
         {
             var Products = ProductRepository.GetAll();
@@ -139,6 +143,7 @@ namespace TP_Product.Controllers
         }
 
         // GET: ProductController/Search
+        [AllowAnonymous]
         public ActionResult Search(string val)
         {
             var result = ProductRepository.FindByName(val ?? "");
