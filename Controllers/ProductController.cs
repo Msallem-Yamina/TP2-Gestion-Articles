@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace TP_Product.Controllers
 {
 
-    // [Authorize(Roles = "Admin,Manager")]
+    [Authorize(Roles = "Admin,Manager")]
     public class ProductController : Controller
     {
         readonly IProductRepository ProductRepository;
